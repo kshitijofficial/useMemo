@@ -1,0 +1,30 @@
+import { useState,useMemo} from "react";
+import "./App.css";
+
+const App = () => {
+  const [number, setNumber] = useState(0);
+  const [counter,setCounter] = useState(0)
+  const expensiveFunction = (number) => {
+    for (let i = 0; i < 1000000000; i++) {}
+    return number;
+  };
+
+  const data = useMemo(
+    ()=>{
+      return expensiveFunction(number)//number = 1
+    },[number])
+
+  return (
+    <div>
+      {data}
+      <br></br>
+      <button onClick={() => setNumber(number + 1)}>Number Increment</button>
+      <br></br>
+      {counter}
+      <br></br>
+      <button onClick={() => setCounter(counter + 1)}>Counter Increment</button>
+    </div>
+  );
+};
+
+export default App;
